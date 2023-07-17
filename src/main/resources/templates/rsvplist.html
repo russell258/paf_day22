@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Confirm Date</th>
+            <th>Comments</th>
+        </thead>
+        <tbody>
+            <tr th:each="rsvp: ${rsvps}">
+                <td th:utext="${rsvp.fullName}"></td>
+                <td th:utext="${rsvp.email}"></td>
+                <td th:utext="${rsvp.phone}"></td>
+                <td th:utext="${rsvp.confirmationDate}"></td>
+                <td th:utext="${rsvp.comment}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

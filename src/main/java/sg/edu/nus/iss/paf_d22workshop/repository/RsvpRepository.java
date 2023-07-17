@@ -29,7 +29,7 @@ public class RsvpRepository {
 
     public List<RSVP> findAll(){
         List<RSVP> rsvps = new ArrayList<>();
-        rsvps = jdbcTemplate.queryForList(findAllSQL,RSVP.class);
+        rsvps = jdbcTemplate.query(findAllSQL,BeanPropertyRowMapper.newInstance(RSVP.class));
         return rsvps;
     }
 
