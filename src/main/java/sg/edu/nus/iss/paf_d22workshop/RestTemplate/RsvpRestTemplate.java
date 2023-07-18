@@ -12,7 +12,7 @@ import sg.edu.nus.iss.paf_d22workshop.model.RSVP;
 
 public class RsvpRestTemplate {
     
-    private static final String RSVP_ENDPOINT_URL = "http://localhost:8080/api/rsvps";
+    private static final String RSVP_ENDPOINT_URL = "http://localhost:8080/api/rsvp";
 
     private static RestTemplate restTemplate = new RestTemplate();
 
@@ -25,11 +25,13 @@ public class RsvpRestTemplate {
     }
 
 
+    //post?
     public Boolean createRSVP(RSVP newRSVP){
         ResponseEntity<Boolean> result = restTemplate.postForEntity(RSVP_ENDPOINT_URL, newRSVP, Boolean.class);
         return result.getBody();
     }
 
+    //put
     public Boolean updateRSVP(RSVP rsvp){
         HttpEntity<String> entity = new HttpEntity<String>("parameters");
         ResponseEntity<Boolean> result = restTemplate.exchange(RSVP_ENDPOINT_URL,HttpMethod.PUT,entity,Boolean.class);

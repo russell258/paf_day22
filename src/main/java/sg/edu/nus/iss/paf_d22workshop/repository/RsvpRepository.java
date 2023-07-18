@@ -18,9 +18,9 @@ public class RsvpRepository {
 
     private String findAllSQL = "select * from rsvp";
     private String findByNameSQL = "select * from rsvp where id = ?";
-    private String insertSQL = "insert into RSVP (full_name,email,phone,confirmation_date,comments) values (?,?,?,?,?)"; 
-    private String updateSQL = "update RSVP set email = ?, phone = ?, confirmation_date = ? where id = ?";
-    private String countSQL = "select count(*) from RSVP";
+    private String insertSQL = "insert into rsvp (full_name,email,phone,confirmation_date,comments) values (?,?,?,?,?)"; 
+    private String updateSQL = "update rsvp set email = ?, phone = ?, confirmation_date = ? where id = ?";
+    private String countSQL = "select count(*) from rsvp";
 
     public int count(){
         int iResult = jdbcTemplate.queryForObject(countSQL,Integer.class);
@@ -33,15 +33,15 @@ public class RsvpRepository {
         return rsvps;
     }
 
-    public RSVP findByName(int id){
+    public RSVP findByName(String name){
         RSVP rsvp = new RSVP();
-        rsvp = jdbcTemplate.queryForObject(findByNameSQL, BeanPropertyRowMapper.newInstance(RSVP.class), id);
+        rsvp = jdbcTemplate.queryForObject(findByNameSQL, BeanPropertyRowMapper.newInstance(RSVP.class), name);
         return rsvp;
     }
 
     public Boolean save(RSVP rsvp){
         int result = 0;
-        result = jdbcTemplate.update(insertSQL, rsvp.getFullName(),rsvp.getEmail(), rsvp.getPhone(),rsvp.getConfirmationDate(),rsvp.getComment());
+        result = jdbcTemplate.update(insertSQL, rsvp.getFullName(),rsvp.getEmail(), rsvp.getPhone(),rsvp.getConfirmationDate(),rsvp.getComments());
         return result > 0 ? true: false;
     }
 

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <table>
+    <table border = '1' style="border:1 px solid black;">
         <thead>
             <th>Name</th>
             <th>Email</th>
@@ -21,7 +21,7 @@
                 <td th:utext="${rsvp.email}"></td>
                 <td th:utext="${rsvp.phone}"></td>
                 <td th:utext="${rsvp.confirmationDate}"></td>
-                <td th:utext="${rsvp.comment}"></td>
+                <td th:utext="${rsvp.comments}"></td>
             </tr>
         </tbody>
     </table>

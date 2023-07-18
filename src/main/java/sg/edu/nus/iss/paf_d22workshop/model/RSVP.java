@@ -15,5 +15,5 @@ public class RSVP {
     private String email;
     private String phone;
     private Date confirmationDate;
-    private String comment;
+    private String comments;
 }

@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.paf_d22workshop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,10 @@ public class RsvpController {
 
     @GetMapping
     public List<RSVP> getAllRSVP(){
-        return rsvpRepo.findAll();
+        List<RSVP> rsvps = new ArrayList<>();
+        rsvps = rsvpRepo.findAll();
+
+        return rsvps;
     }
 
     @GetMapping("/count")
@@ -35,15 +39,15 @@ public class RsvpController {
         return ResponseEntity.ok().body(countRsvp);
     }
 
-    @GetMapping("/{rsvp-id}")
-    public ResponseEntity<RSVP> getByName(@PathVariable("rsvp-id") int id){
-        RSVP rsvp = rsvpRepo.findByName(id);
+    @GetMapping("/{rsvp-name}")
+    public ResponseEntity<RSVP> getByName(@PathVariable("rsvp-name") String name){
+        RSVP rsvp = rsvpRepo.findByName(name);
 
         if (rsvp!=null){
-            return new ResponseEntity<RSVP> (rsvp,HttpStatus.OK);
+            return new ResponseEntity<RSVP>(rsvp,HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -52,15 +56,15 @@ public class RsvpController {
         saved = rsvpRepo.save(rsvp);
 
         if (saved){
-            return ResponseEntity.ok().body(saved);
+            return new ResponseEntity<>(saved, HttpStatus.CREATED);
         }else{
             return ResponseEntity.internalServerError().build();
         }
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> updateRSVP(@PathVariable("rsvp-id") int id, @RequestBody RSVP rsvp){
-        RSVP r = rsvpRepo.findByName(id);
+    public ResponseEntity<Boolean> updateRSVP(@PathVariable("rsvp-name") String name, @RequestBody RSVP rsvp){
+        RSVP r = rsvpRepo.findByName(name);
         
         Boolean updated = false;
 

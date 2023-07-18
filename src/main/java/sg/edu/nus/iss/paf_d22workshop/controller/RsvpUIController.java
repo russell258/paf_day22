@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +32,6 @@ public class RsvpUIController {
     @PostMapping("/saveRSVP")
     public String postRSVP(@ModelAttribute RSVP rsvp){
         Boolean bResult = restTemplate.createRSVP(rsvp);
-
         return "home";
     }
 
@@ -41,7 +39,7 @@ public class RsvpUIController {
     public String listRSVP(Model model){
         List<RSVP> rsvps = restTemplate.getRSVPS();
         model.addAttribute("rsvps",rsvps);
-
+        System.out.println(rsvps);
         return "rsvplist";
     }
 
